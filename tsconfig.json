@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "NodeNext",
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "module": "NodeNext",
+        "baseUrl": "./src",
+        "outDir": "./dist",
+        "allowJs": true,
+        "target": "es5"
+    },
+    "include": ["src/**/*.js", "src/**/*.ts"]
+}
