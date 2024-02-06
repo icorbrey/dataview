@@ -1,0 +1,23 @@
+{
+  "name": "dataview",
+  "version": "1.0.0",
+  "description": "The Dataview backing code for my Obsidian vault.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icorbrey/dataview.git"
+  },
+  "keywords": [
+    "obsidian",
+    "dataview"
+  ],
+  "author": "Isaac Corbrey <icorbrey@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/icorbrey/dataview/issues"
+  },
+  "homepage": "https://github.com/icorbrey/dataview#readme"
+}
