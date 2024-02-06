@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/icorbrey/dataview/issues"
   },
-  "homepage": "https://github.com/icorbrey/dataview#readme"
+  "homepage": "https://github.com/icorbrey/dataview#readme",
+  "devDependencies": {
+    "prettier": "3.2.5"
+  }
 }
