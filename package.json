@@ -23,7 +23,9 @@
     "homepage": "https://github.com/icorbrey/dataview#readme",
     "devDependencies": {
         "@types/jest": "^29.5.12",
+        "@types/luxon": "^3.4.2",
         "jest": "^29.7.0",
+        "obsidian-dataview": "^0.5.64",
         "prettier": "3.2.5",
         "ts-jest": "^29.1.2",
         "ts-loader": "^9.5.1",
