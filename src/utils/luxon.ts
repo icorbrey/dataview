@@ -1,5 +1,7 @@
 export default dv.luxon;
 
+export type DateTime = import('luxon').DateTime;
+
 export const FixedOffsetZone = dv.luxon.FixedOffsetZone;
 export const InvalidZone = dv.luxon.InvalidZone;
 export const SystemZone = dv.luxon.SystemZone;

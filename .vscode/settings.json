@@ -3,5 +3,8 @@
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
         "*.ts": "${capture}.js, ${capture}.test.ts"
-    }
+    },
+    "typescript.preferences.preferTypeOnlyAutoImports": true,
+    "typescript.preferences.importModuleSpecifier": "project-relative",
+    "typescript.preferences.importModuleSpecifierEnding": "minimal"
 }
