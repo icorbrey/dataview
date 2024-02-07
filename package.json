@@ -4,6 +4,7 @@
     "description": "The Dataview backing code for my Obsidian vault.",
     "private": true,
     "scripts": {
+        "start": "webpack --watch",
         "build": "webpack",
         "test": "jest"
     },

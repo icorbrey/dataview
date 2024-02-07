@@ -1,4 +1,4 @@
-import { None, Option, Some } from './option';
+import { None, Option, Some } from 'utils/option';
 
 type ResultState<T, E> = { isOk: true; value: T } | { isOk: false; error: E };
 

@@ -47,6 +47,11 @@ export class Option<T> {
         throw new Error(message);
     }
 
+    public static expect =
+        <T>(message: string) =>
+        (option: Option<T>) =>
+            option.expect(message);
+
     public unwrap(): T {
         return this.expect('Option was None');
     }
@@ -58,6 +63,11 @@ export class Option<T> {
 
         return value;
     }
+
+    public static unwrapOr =
+        <T>(value: T) =>
+        (option: Option<T>) =>
+            option.unwrapOr(value);
 
     public unwrapOrElse(fn: () => T): T {
         if (this.m.isSome === true) {
@@ -90,6 +100,11 @@ export class Option<T> {
 
         return value;
     }
+
+    public static mapOr =
+        <T, U>(value: U, fn: (value: T) => U) =>
+        (option: Option<T>) =>
+            option.mapOr(value, fn);
 
     public mapOrElse<U>(valueFn: () => U, fn: (value: T) => U): U {
         if (this.m.isSome === true) {

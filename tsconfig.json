@@ -8,7 +8,7 @@
         "baseUrl": "./src",
         "outDir": "./dist",
         "allowJs": true,
-        "target": "es5"
+        "target": "ESNext"
     },
     "include": ["src/**/*.js", "src/**/*.ts"]
 }
