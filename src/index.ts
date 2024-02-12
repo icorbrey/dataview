@@ -3,6 +3,7 @@ import { pendingActionItems } from 'components/pendingActionItems';
 import { departmentMembers } from 'components/departmentMembers';
 import { activeWorkItems } from 'components/activeWorkItems';
 import { recentMeetings } from 'components/recentMeetings';
+import { teamMembers } from './components/teamMembers';
 import { Registry } from 'utils/registry';
 import { pages } from 'pages';
 
@@ -28,7 +29,11 @@ const registry = Registry.new()
     .register('#subjectMatterExperts', subjectMatterExperts.component)
     .register('@subjectMatterExperts.content', subjectMatterExperts.content)
     .register('@subjectMatterExperts.header', subjectMatterExperts.header)
+    .register('#teamMembers', teamMembers.component)
+    .register('@teamMembers.content', teamMembers.content)
+    .register('@teamMembers.header', teamMembers.header)
     .register('_department', pages.department)
-    .register('_system', pages.system);
+    .register('_system', pages.system)
+    .register('_team', pages.team);
 
 registry.run(input);

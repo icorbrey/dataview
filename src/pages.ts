@@ -14,4 +14,10 @@ export const pages = {
             '#subjectMatterExperts',
             '#recentMeetings',
         ]),
+    team: () =>
+        Render.views([
+            '#pendingActionItems',
+            '#recentMeetings',
+            '#teamMembers',
+        ]),
 };

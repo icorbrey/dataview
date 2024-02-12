@@ -67,7 +67,7 @@ export const pendingActionItems = {
         dv.span(
             0 < count
                 ? `Pending action items (${count} remaining)`
-                : 'No pending action items remaining',
+                : 'No pending action items',
         );
     },
     content: () => {
