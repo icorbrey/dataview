@@ -1,19 +1,21 @@
 import type { DataArray } from 'obsidian-dataview/lib/api/data-array';
-import { callout, type CalloutSettings } from 'markdown/callout';
-import { link as _link } from 'markdown/link';
-import type { Link } from 'utils/page';
+import { Markdown, type CalloutSettings } from 'utils/markdown';
+import type { Link } from '../models/link';
+import type { RegistryEntries } from '..';
 
 export class Render {
     private constructor() {}
 
     public static callout = (settings: CalloutSettings) =>
-        Render.paragraph(callout(settings));
+        Render.paragraph(Markdown.callout(settings));
 
-    public static link = (link: Link, text: string) =>
-        Render.span(_link(link, text));
+    public static link = (link: Link, display?: string) =>
+        Render.span(Markdown.link(link.path, display));
 
-    public static list = <T = any>(items: T[] | DataArray<T>) =>
-        0 < items.length ? dv.list(items) : undefined;
+    public static list = <T = any>(
+        items: T[] | DataArray<T>,
+        showIfEmpty = true,
+    ) => (0 < items.length || showIfEmpty ? dv.list(items) : undefined);
 
     public static paragraph = (text: string) => dv.paragraph(text);
 
@@ -22,8 +24,18 @@ export class Render {
     public static table = (
         columns: string[],
         rows: string[][] | DataArray<string[]>,
-    ) => (0 < rows.length ? dv.table(columns, rows) : undefined);
+        showIfEmpty = true,
+    ) => (0 < rows.length || showIfEmpty ? dv.table(columns, rows) : undefined);
 
-    public static view = (id: string): string =>
+    public static taskList = (
+        tasks: DataArray<any>,
+        showIfEmpty = true,
+        groupByFile = false,
+    ) =>
+        0 < tasks.length || showIfEmpty
+            ? dv.taskList(tasks, groupByFile)
+            : undefined;
+
+    public static view = (id: RegistryEntries): string =>
         `\`$= dv.view('views/view', ['${id}'])\``;
 }

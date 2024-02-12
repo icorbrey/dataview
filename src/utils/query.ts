@@ -13,6 +13,9 @@ export class Query {
         (right: U) =>
             (left as any) === (right as any);
 
+    public static isEmpty = <T extends { length: number }>(value: T) =>
+        value.length === 0;
+
     public static hasSubstring = (substring: string) => (str: string) =>
         str.includes(substring);
 

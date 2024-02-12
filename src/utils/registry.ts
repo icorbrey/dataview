@@ -1,6 +1,6 @@
-import { Array } from './array';
-import { None } from './option';
-import { Render } from './render';
+import { Render } from 'utils/render';
+import { Array } from 'utils/array';
+import { None } from 'utils/option';
 
 type RegistryState<T extends { [key: string]: any }> = T;
 
@@ -23,14 +23,16 @@ export class Registry<T extends { [key: string]: any } = {}> {
         });
 
     public run = (input: any) =>
-        Array.normalize(input).map(([key, input]: any) =>
-            !!this.state[key]
-                ? this.state[key](input)
-                : Render.callout({
-                      header: `Error: No registered view with ID "${key}".`,
-                      modifier: 'static',
-                      content: None(),
-                      type: 'error',
-                  }),
-        );
+        Array.normalize(input)
+            .map(Array.normalize)
+            .map(([key, input]: any) =>
+                !!this.state[key]
+                    ? this.state[key](input)
+                    : Render.callout({
+                          header: `Error: No registered view with ID "${key}".`,
+                          modifier: 'static',
+                          content: None(),
+                          type: 'error',
+                      }),
+            );
 }

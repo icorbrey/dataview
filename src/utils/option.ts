@@ -1,3 +1,4 @@
+import { Assert } from './assert';
 import { Err, Ok, Result } from './result';
 
 type OptionState<T> = { isSome: true; value: T } | { isSome: false };
@@ -9,11 +10,10 @@ export class Option<T> {
     }
 
     public static Some<T>(value: T): Option<T> {
-        if (value === undefined || value === null) {
-            throw new Error(
-                'Cannot initialize Some value with undefined or null.',
-            );
-        }
+        Assert.isDefined(
+            value,
+            'Cannot initialize Some value with undefined or null.',
+        );
 
         return new Option<T>({
             isSome: true,
@@ -27,9 +27,19 @@ export class Option<T> {
         });
     }
 
+    public static fromNullable<T>(value?: T): Option<T> {
+        if (value !== undefined && value !== null) {
+            return Some(value);
+        }
+
+        return None();
+    }
+
     public isSome(): boolean {
         return this.m.isSome === true;
     }
+
+    public static isSome = <T>(option: Option<T>) => option.isSome();
 
     public isSomeAnd(fn: (value: T) => boolean): boolean {
         return this.m.isSome === true && fn(this.m.value);
@@ -44,7 +54,7 @@ export class Option<T> {
             return this.m.value;
         }
 
-        throw new Error(message);
+        Assert.fail(message);
     }
 
     public static expect =
@@ -84,6 +94,11 @@ export class Option<T> {
 
         return None();
     }
+
+    public static map =
+        <T, U>(fn: (value: T) => U) =>
+        (option: Option<T>) =>
+            option.map(fn);
 
     public inspect(fn: (value: T) => void): Option<T> {
         if (this.m.isSome === true) {
@@ -233,6 +248,11 @@ export class Option<T> {
 
         return None();
     }
+
+    public toString = () =>
+        this.m.isSome === true ? `Some(${this.m.value})` : `None()`;
+
+    public static toString = <T>(option: Option<T>) => option.toString();
 }
 
 export const Some = Option.Some;

@@ -1,6 +1,6 @@
 import type { Predicate } from 'utils/types';
 
-export class Array {
+class _Array {
     private constructor() {}
 
     public static append =
@@ -10,6 +10,11 @@ export class Array {
     public static prepend =
         <T>(value: T) =>
         (array: T[]) => [value, ...array];
+
+    public static every =
+        <T>(fn: Predicate<T>) =>
+        (array: T[]) =>
+            array.every(fn);
 
     public static filter =
         <T>(fn: Predicate<T>) =>
@@ -26,10 +31,18 @@ export class Array {
         (array: T[]) =>
             array.map(fn);
 
-    public static normalize = <T>(value: T | T[]) => [].concat([value]);
+    public static normalize = <T>(value: T | T[]) =>
+        Array.isArray(value) ? value : [value];
+
+    public static some =
+        <T>(fn: Predicate<T>) =>
+        (array: T[]) =>
+            array.some(fn);
 
     public static toDefined = <T>(array: T[]) =>
-        Array.filter<T>((x) => x !== undefined)(array);
+        _Array.filter<T>((x) => x !== undefined)(array);
 
     public static toDistinct = <T>(array: T[]) => [...new Set(array)];
 }
+
+export { _Array as Array };
