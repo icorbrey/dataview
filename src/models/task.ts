@@ -1,9 +1,8 @@
 import type { DateTime } from 'utils/luxon';
-import { Link } from 'models/link';
 import { Option } from 'utils/option';
 import { Array } from 'utils/array';
-import { pipe } from '../utils/func';
-import { Query } from '../utils/query';
+import { Query } from 'utils/query';
+import { Link } from 'models/link';
 
 type TaskState = {
     completedOn: Option<DateTime>;
@@ -11,6 +10,7 @@ type TaskState = {
     header: Option<Link>;
     isComplete: boolean;
     outlinks: Link[];
+    dataviewTask: Record<string, any>;
     path: string;
     section: Option<Link>;
     subtasks: Task[];
@@ -45,6 +45,7 @@ export class Task {
             section: Option.fromNullable(task.section),
             header: Option.fromNullable(task.header),
             dueOn: Option.fromNullable(task.due),
+            dataviewTask: task,
         });
 
     public hasOutlinkTo = (link: Link) =>
@@ -81,6 +82,10 @@ export class Task {
     public static path = (task: Task) => task.path;
     public static tags = (task: Task) => task.tags;
     public static text = (task: Task) => task.text;
+
+    public get dataviewTask() {
+        return this.m.dataviewTask;
+    }
 
     public get isIncomplete() {
         return !this.isComplete;

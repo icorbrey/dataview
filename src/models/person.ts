@@ -1,13 +1,13 @@
-import { Link } from 'models/link';
 import { Option } from 'utils/option';
 import { Array } from 'utils/array';
+import { Link } from 'models/link';
 import { Page } from 'models/page';
 
 type PersonState = {
     allergies: string[];
     department: Option<Link>;
     email: Option<string>;
-    employer: Option<string>;
+    employer: Option<Link>;
     expertOn: Link[];
     favoriteDonut: Option<string>;
     firstName: string;
@@ -48,16 +48,18 @@ export class Person {
                 .map(Array.map(Link.fromRecord))
                 .unwrapOr([]),
 
+            department: Option.fromNullable(page.department).map(
+                Link.fromRecord,
+            ),
+            employer: Option.fromNullable(page.employer).map(Link.fromRecord),
+            school: Option.fromNullable(page.school).map(Link.fromRecord),
             graduationYear: Option.fromNullable(page['graduation-year']),
+            major: Option.fromNullable(page.major).map(Link.fromRecord),
+            minor: Option.fromNullable(page.minor).map(Link.fromRecord),
             favoriteDonut: Option.fromNullable(page['favorite-donut']),
             reportsTo: Option.fromNullable(page['reports-to']),
-            department: Option.fromNullable(page.department),
-            employer: Option.fromNullable(page.employer),
             githubUrl: Option.fromNullable(page.github),
-            school: Option.fromNullable(page.school),
             email: Option.fromNullable(page.email),
-            major: Option.fromNullable(page.major),
-            minor: Option.fromNullable(page.minor),
             phone: Option.fromNullable(page.phone),
         }));
 

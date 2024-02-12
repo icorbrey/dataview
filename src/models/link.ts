@@ -1,7 +1,5 @@
 import { Markdown } from 'utils/markdown';
 import { Option } from 'utils/option';
-import { Query } from 'utils/query';
-import { Page } from './page';
 import { File } from './file';
 
 type LinkType = 'file' | 'section' | 'block';
@@ -31,11 +29,7 @@ export class Link {
             type: record.type,
         });
 
-    public isReferenceTo = (target: Link) =>
-        Query.or(
-            Query.equals(this.path),
-            Query.hasSubstring(this.path),
-        )(target.path);
+    public isReferenceTo = (target: Link) => this.path === target.path;
 
     public static isReferenceTo = (target: Link) => (source: Link) =>
         source.isReferenceTo(target);

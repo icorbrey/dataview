@@ -1,9 +1,10 @@
 import { subjectMatterExperts } from 'components/subjectMatterExperts';
 import { pendingActionItems } from 'components/pendingActionItems';
+import { departmentMembers } from 'components/departmentMembers';
 import { activeWorkItems } from 'components/activeWorkItems';
+import { recentMeetings } from 'components/recentMeetings';
 import { Registry } from 'utils/registry';
 import { pages } from 'pages';
-import { recentMeetings } from './components/recentMeetings';
 
 /** Input value from Dataview call in Obsidian. */
 declare const input: unknown;
@@ -15,6 +16,9 @@ const registry = Registry.new()
     .register('#activeWorkItems', activeWorkItems.component)
     .register('@activeWorkItems.content', activeWorkItems.content)
     .register('@activeWorkItems.header', activeWorkItems.header)
+    .register('#departmentMembers', departmentMembers.component)
+    .register('@departmentMembers.content', departmentMembers.content)
+    .register('@departmentMembers.header', departmentMembers.header)
     .register('#pendingActionItems', pendingActionItems.component)
     .register('@pendingActionItems.content', pendingActionItems.content)
     .register('@pendingActionItems.header', pendingActionItems.header)
@@ -24,6 +28,7 @@ const registry = Registry.new()
     .register('#subjectMatterExperts', subjectMatterExperts.component)
     .register('@subjectMatterExperts.content', subjectMatterExperts.content)
     .register('@subjectMatterExperts.header', subjectMatterExperts.header)
+    .register('_department', pages.department)
     .register('_system', pages.system);
 
 registry.run(input);

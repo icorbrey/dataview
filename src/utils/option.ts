@@ -45,6 +45,11 @@ export class Option<T> {
         return this.m.isSome === true && fn(this.m.value);
     }
 
+    public static isSomeAnd =
+        <T>(fn: (value: T) => boolean) =>
+        (option: Option<T>) =>
+            option.isSomeAnd(fn);
+
     public isNone(): boolean {
         return this.m.isSome === false;
     }

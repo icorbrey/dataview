@@ -29,6 +29,8 @@ export class Meeting {
                 .unwrapOr([]),
         }));
 
+    public static tasks = (page: Page<MeetingState>) => page.file.tasks;
+
     public static property = <K extends keyof MeetingState>(key: K) =>
         Page.property<MeetingState, K>(key);
 }
