@@ -1,4 +1,5 @@
 import { File } from 'models/file';
+import { Markdown } from '../utils/markdown';
 
 type PageState<T extends { [key: string]: any }> = {
     aliases: string[];
@@ -53,4 +54,9 @@ export class Page<T extends { [key: string]: any }> {
         <T extends { [key: string]: any }, K extends keyof T>(key: K) =>
         (page: Page<T>) =>
             page.property(key);
+
+    public toMarkdownLink = (display?: string) =>
+        Markdown.link(this.file.name, display);
+
+    public static toMarkdownLink = <T>(page: Page<T>) => page.toMarkdownLink();
 }

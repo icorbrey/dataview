@@ -3,6 +3,7 @@ import { pendingActionItems } from 'components/pendingActionItems';
 import { activeWorkItems } from 'components/activeWorkItems';
 import { Registry } from 'utils/registry';
 import { pages } from 'pages';
+import { recentMeetings } from './components/recentMeetings';
 
 /** Input value from Dataview call in Obsidian. */
 declare const input: unknown;
@@ -17,6 +18,9 @@ const registry = Registry.new()
     .register('#pendingActionItems', pendingActionItems.component)
     .register('@pendingActionItems.content', pendingActionItems.content)
     .register('@pendingActionItems.header', pendingActionItems.header)
+    .register('#recentMeetings', recentMeetings.component)
+    .register('@recentMeetings.content', recentMeetings.content)
+    .register('@recentMeetings.header', recentMeetings.header)
     .register('#subjectMatterExperts', subjectMatterExperts.component)
     .register('@subjectMatterExperts.content', subjectMatterExperts.content)
     .register('@subjectMatterExperts.header', subjectMatterExperts.header)

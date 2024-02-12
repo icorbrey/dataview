@@ -6,5 +6,6 @@ export const pages = {
             '#pendingActionItems',
             '#activeWorkItems',
             '#subjectMatterExperts',
+            '#recentMeetings',
         ]),
 };

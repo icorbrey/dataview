@@ -1,5 +1,5 @@
 import { None, Some, type Option } from 'utils/option';
-import type { DateTimeUnit } from 'luxon';
+import type { DateTimeUnit, DurationLike } from 'luxon';
 import { DateTime } from 'utils/luxon';
 
 export class Date {
@@ -17,4 +17,8 @@ export class Date {
             date.hasSame(mark, unit);
 
     public static isToday = Date.hasSame(Date.today(), 'day');
+
+    public static occurredInLast =
+        (duration: DurationLike) => (date: DateTime) =>
+            Date.today().minus(duration) < date;
 }

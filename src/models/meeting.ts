@@ -28,4 +28,7 @@ export class Meeting {
                 .map(Array.map(Link.fromRecord))
                 .unwrapOr([]),
         }));
+
+    public static property = <K extends keyof MeetingState>(key: K) =>
+        Page.property<MeetingState, K>(key);
 }
