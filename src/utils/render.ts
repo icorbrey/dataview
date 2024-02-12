@@ -17,6 +17,10 @@ export class Render {
         showIfEmpty = true,
     ) => (0 < items.length || showIfEmpty ? dv.list(items) : undefined);
 
+    public static views = (ids: RegistryEntries[]) => {
+        ids.forEach((id) => Render.paragraph(Render.view(id)));
+    };
+
     public static paragraph = (text: string) => dv.paragraph(text);
 
     public static span = (text: string) => dv.span(text);

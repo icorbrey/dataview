@@ -38,8 +38,8 @@ export const pendingActionItems = {
                 0 < query.incompleteAndCompletedToday().length
                     ? 'open'
                     : 'closed',
-            content: Some(Render.view('pendingActionItems.content')),
-            header: Render.view('pendingActionItems.header'),
+            content: Some(Render.view('@pendingActionItems.content')),
+            header: Render.view('@pendingActionItems.header'),
             type: 'todo',
         }),
     header: () => {

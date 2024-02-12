@@ -9,15 +9,13 @@ import { pipe } from 'utils/func';
 export const subjectMatterExperts = {
     component: () =>
         Render.callout({
-            content: Some(Render.view('subjectMatterExperts.content')),
-            header: Render.view('subjectMatterExperts.header'),
+            content: Some(Render.view('@subjectMatterExperts.content')),
+            header: Render.view('@subjectMatterExperts.header'),
             modifier: 'closed',
             type: 'info',
         }),
     header: () => {
         const count = query.all().length;
-
-        console.log(query.all());
 
         return Render.span(
             0 < count

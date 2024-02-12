@@ -1,18 +1,16 @@
-import { WorkItem, type WorkItemPage } from 'models/workItem';
 import { Option, Some } from 'utils/option';
+import { WorkItem } from 'models/workItem';
 import { Markdown } from 'utils/markdown';
 import { Render } from 'utils/render';
-import { Array } from 'utils/array';
 import { Query } from 'utils/query';
-import { Page } from 'models/page';
 import { Link } from 'models/link';
 import { pipe } from 'utils/func';
 
 export const activeWorkItems = {
     component: () =>
         Render.callout({
-            content: Some(Render.view('activeWorkItems.content')),
-            header: Render.view('activeWorkItems.header'),
+            content: Some(Render.view('@activeWorkItems.content')),
+            header: Render.view('@activeWorkItems.header'),
             modifier: 'closed',
             type: 'todo',
         }),
