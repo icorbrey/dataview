@@ -1,3 +1,4 @@
+import { Err, Ok, type Result } from 'utils/result';
 import { Render } from 'utils/render';
 import { Array } from 'utils/array';
 import { None } from 'utils/option';
@@ -25,14 +26,31 @@ export class Registry<T extends { [key: string]: any } = {}> {
     public run = (input: any) =>
         Array.normalize(input)
             .map(Array.normalize)
-            .map(([key, input]: any) =>
-                !!this.state[key]
-                    ? this.state[key](input)
-                    : Render.callout({
-                          header: `Error: No registered view with ID "${key}".`,
-                          modifier: 'static',
-                          content: None(),
-                          type: 'error',
-                      }),
+            .map(([key, input]: any) => [
+                Object.keys(this.state).includes(key) ? Ok(key) : Err(key),
+                input,
+            ])
+            .map(([view, input]: [Result<keyof T, string>, any]) =>
+                view.mapOrElse<any>(
+                    this.renderMissingView,
+                    this.executeView(input),
+                ),
             );
+
+    private executeView = (input: any) => (key: keyof T) => {
+        try {
+            this.state[key](input);
+        } catch (e) {
+            console.error(e);
+            throw e;
+        }
+    };
+
+    private renderMissingView = (key: string) =>
+        Render.callout({
+            header: `Error: No registered view with ID "${key}".`,
+            modifier: 'static',
+            content: None(),
+            type: 'error',
+        });
 }

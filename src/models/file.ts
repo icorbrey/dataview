@@ -3,6 +3,7 @@ import { Option } from 'utils/option';
 import { Array } from 'utils/array';
 import { Link } from 'models/link';
 import { Task } from 'models/task';
+import { Page } from './page';
 
 type FileState = {
     aliases: string[];
@@ -27,6 +28,8 @@ export class File {
     private constructor(m: FileState) {
         this.m = m;
     }
+
+    public static current = () => Page.current().file;
 
     public static fromRecord = (file: Record<string, any>) =>
         new File({

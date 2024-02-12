@@ -7,8 +7,9 @@
         "module": "NodeNext",
         "baseUrl": "./src",
         "outDir": "./dist",
-        "allowJs": true,
-        "target": "ESNext"
+        "target": "ESNext",
+        "sourceMap": true,
+        "allowJs": true
     },
     "include": ["src/**/*.js", "src/**/*.ts"]
 }

@@ -19,7 +19,13 @@ export const activeWorkItems = {
     content: () =>
         Render.table(
             ['ID', 'Description', 'Owner'],
-            toTable(query.all().array()),
+            query
+                .all()
+                .map((row) => [
+                    Markdown.link(row.file.path, row.property('id')),
+                    row.property('description'),
+                    row.property('owner').mapOr(undefined, Link.toMarkdownLink),
+                ]),
         ),
     header: () => {
         const count = query.all().length;
@@ -37,20 +43,8 @@ const query = {
                 WorkItem.property('isActive'),
                 pipe(
                     WorkItem.property('system'),
-                    Option.mapOr(
-                        false,
-                        Link.isReferenceTo(Page.current().file.link),
-                    ),
+                    Option.mapOr(false, Link.isReferenceToCurrentPage),
                 ),
             ),
         ),
 };
-
-const toTable = Array.map((row: WorkItemPage) => [
-    Markdown.link(row.file.path, row.property('id')),
-    row.property('description'),
-    pipe(
-        WorkItem.property('owner'),
-        Option.mapOr(undefined, Link.toMarkdownLink),
-    )(row),
-]);

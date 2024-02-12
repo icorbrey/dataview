@@ -1,3 +1,4 @@
+import { subjectMatterExperts } from 'components/subjectMatterExperts';
 import { pendingActionItems } from 'components/pendingActionItems';
 import { activeWorkItems } from 'components/activeWorkItems';
 import { Registry } from 'utils/registry';
@@ -14,6 +15,9 @@ const registry = Registry.new()
     .register('activeWorkItems', activeWorkItems.component)
     .register('pendingActionItems.content', pendingActionItems.content)
     .register('pendingActionItems.header', pendingActionItems.header)
-    .register('pendingActionItems', pendingActionItems.component);
+    .register('pendingActionItems', pendingActionItems.component)
+    .register('subjectMatterExperts.content', subjectMatterExperts.content)
+    .register('subjectMatterExperts.header', subjectMatterExperts.header)
+    .register('subjectMatterExperts', subjectMatterExperts.component);
 
 registry.run(input);

@@ -1,6 +1,8 @@
 import { Markdown } from 'utils/markdown';
 import { Option } from 'utils/option';
 import { Query } from 'utils/query';
+import { Page } from './page';
+import { File } from './file';
 
 type LinkType = 'file' | 'section' | 'block';
 
@@ -17,6 +19,8 @@ export class Link {
     private constructor(m: LinkState) {
         this.m = m;
     }
+
+    public static current = () => File.current().link;
 
     public static fromRecord = (record: Record<string, any>): Link =>
         new Link({
@@ -36,6 +40,9 @@ export class Link {
     public static isReferenceTo = (target: Link) => (source: Link) =>
         source.isReferenceTo(target);
 
+    public static isReferenceToCurrentPage = (link: Link) =>
+        link.isReferenceToCurrentPage;
+
     public toMarkdownLink = (display?: string) =>
         Markdown.link(
             this.path,
@@ -49,6 +56,10 @@ export class Link {
     public static embed = (link: Link) => link.embed;
     public static path = (link: Link) => link.path;
     public static type = (link: Link) => link.type;
+
+    public get isReferenceToCurrentPage() {
+        return this.isReferenceTo(Link.current());
+    }
 
     public get subpath() {
         return this.m.subpath;

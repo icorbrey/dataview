@@ -1,4 +1,4 @@
-import type { Link } from 'models/link';
+import { Link } from 'models/link';
 import { Option } from 'utils/option';
 import { Array } from 'utils/array';
 import { Page } from 'models/page';
@@ -30,21 +30,23 @@ export class Person {
 
     public static fromRecord = (page: Record<string, any>) =>
         Page.fromRecord<PersonState>(page, (page) => ({
-            teams: Option.fromNullable(page.teams).mapOr([], Array.normalize),
             firstName: Option.fromNullable(page['first-name']).expect(
                 'Person should have had a first name.',
             ),
             lastName: Option.fromNullable(page['last-name']).expect(
                 'Person should have had a last name.',
             ),
-            expertOn: Option.fromNullable(page['expert-on']).mapOr(
-                [],
-                Array.normalize,
-            ),
-            allergies: Option.fromNullable(page.allergies).mapOr(
-                [],
-                Array.normalize,
-            ),
+            expertOn: Option.fromNullable(page['expert-on'])
+                .map(Array.normalize)
+                .map(Array.map(Link.fromRecord))
+                .unwrapOr([]),
+            allergies: Option.fromNullable(page.allergies)
+                .map(Array.normalize)
+                .unwrapOr([]),
+            teams: Option.fromNullable(page.teams)
+                .map(Array.normalize)
+                .map(Array.map(Link.fromRecord))
+                .unwrapOr([]),
 
             graduationYear: Option.fromNullable(page['graduation-year']),
             favoriteDonut: Option.fromNullable(page['favorite-donut']),
@@ -58,4 +60,7 @@ export class Person {
             minor: Option.fromNullable(page.minor),
             phone: Option.fromNullable(page.phone),
         }));
+
+    public static property = <K extends keyof PersonState>(key: K) =>
+        Page.property<PersonState, K>(key);
 }
