@@ -16,7 +16,7 @@ export const recentMeetings = {
             modifier: 'closed',
             type: 'example',
         }),
-    content: () => Render.list(query.all().map(Page.toMarkdownLink), false),
+    content: () => Render.list(query.all().map(Page.toMarkdownLink()), false),
     header: () => {
         const count = query.all().length;
 

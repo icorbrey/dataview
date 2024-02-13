@@ -3,13 +3,15 @@ import { recentConversations } from 'components/recentConversations';
 import { pendingActionItems } from 'components/pendingActionItems';
 import { departmentMembers } from 'components/departmentMembers';
 import { activeWorkItems } from 'components/activeWorkItems';
+import { databaseTables } from 'components/databaseTables';
 import { recentMeetings } from 'components/recentMeetings';
 import { directReports } from 'components/directReports';
 import { teamMembers } from 'components/teamMembers';
+import { databases } from 'components/databases';
 import { employees } from 'components/employees';
+import { students } from 'components/students';
 import { Registry } from 'utils/registry';
 import { pages } from 'pages';
-import { students } from './components/students';
 
 /** Input value from Dataview call in Obsidian. */
 declare const input: unknown;
@@ -21,6 +23,12 @@ const registry = Registry.new()
     .register('#activeWorkItems', activeWorkItems.component)
     .register('@activeWorkItems.content', activeWorkItems.content)
     .register('@activeWorkItems.header', activeWorkItems.header)
+    .register('#databases', databases.component)
+    .register('@databases.content', databases.content)
+    .register('@databases.header', databases.header)
+    .register('#databaseTables', databaseTables.component)
+    .register('@databaseTables.content', databaseTables.content)
+    .register('@databaseTables.header', databaseTables.header)
     .register('#departmentMembers', departmentMembers.component)
     .register('@departmentMembers.content', departmentMembers.content)
     .register('@departmentMembers.header', departmentMembers.header)
@@ -48,9 +56,11 @@ const registry = Registry.new()
     .register('#teamMembers', teamMembers.component)
     .register('@teamMembers.content', teamMembers.content)
     .register('@teamMembers.header', teamMembers.header)
+    .register('_database', pages.database)
     .register('_department', pages.department)
     .register('_organization', pages.organization)
     .register('_person', pages.person)
+    .register('_swimlane', pages.swimlane)
     .register('_system', pages.system)
     .register('_team', pages.team)
     .register('_workItem', pages.workItem);

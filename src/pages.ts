@@ -1,6 +1,7 @@
 import { Render } from './utils/render';
 
 export const pages = {
+    database: () => Render.views(['#databaseTables']),
     department: () =>
         Render.views([
             '#pendingActionItems',
@@ -16,6 +17,7 @@ export const pages = {
             '#recentConversations',
             '#directReports',
         ]),
+    swimlane: () => Render.views(['#databases']),
     system: () =>
         Render.views([
             '#pendingActionItems',

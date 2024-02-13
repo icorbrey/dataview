@@ -5,6 +5,7 @@ import { Array } from 'utils/array';
 import { Some } from 'utils/option';
 import { Link } from 'models/link';
 import { pipe } from 'utils/func';
+import { Page } from '../models/page';
 
 export const teamMembers = {
     component: () =>
@@ -27,7 +28,7 @@ export const teamMembers = {
             query
                 .all()
                 .map((row) => [
-                    Markdown.link(row.file.name),
+                    Page.toMarkdownLink()(row),
                     row.property('email').unwrapOr(undefined),
                     row.property('phone').unwrapOr(undefined),
                 ]),

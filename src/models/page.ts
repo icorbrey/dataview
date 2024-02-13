@@ -60,5 +60,8 @@ export class Page<T extends { [key: string]: any }> {
     public toMarkdownLink = (display?: string) =>
         Markdown.link(this.file.name, display);
 
-    public static toMarkdownLink = <T>(page: Page<T>) => page.toMarkdownLink();
+    public static toMarkdownLink =
+        <T, U extends string>(fn?: (page: Page<T>) => U) =>
+        (page: Page<T>) =>
+            page.toMarkdownLink(fn && fn(page));
 }
