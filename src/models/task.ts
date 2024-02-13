@@ -71,6 +71,7 @@ export class Task {
     public static isInSection = (section: string) => (task: Task) =>
         task.isInSection(section);
 
+    public static dataviewTask = (task: Task) => task.dataviewTask;
     public static isIncomplete = (task: Task) => task.isIncomplete;
     public static completedOn = (task: Task) => task.completedOn;
     public static isComplete = (task: Task) => task.isComplete;

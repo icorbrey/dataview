@@ -14,6 +14,10 @@ const query = {
             .where(
                 Query.or(
                     pipe(
+                        Meeting.property('attendees'),
+                        Array.some(Link.isReferenceToCurrentPage),
+                    ),
+                    pipe(
                         Meeting.property('topics'),
                         Array.some(Link.isReferenceToCurrentPage),
                     ),
@@ -26,17 +30,6 @@ const query = {
             .file.tasks.where(
                 Query.and(Task.isInSection('Action items'), Task.hasText),
             ),
-
-    // {
-
-    //     return Meeting.query().file.tasks.where(
-    //         Query.and(
-    //             Task.isInSection('Action items'),
-    //             Task.hasText,
-    //             Task.hasOutlinkToCurrentPage,
-    //         ),
-    //     );
-    // },
     incomplete: () => query.all().where(Task.isIncomplete),
     incompleteAndCompletedToday: () =>
         query
@@ -47,7 +40,7 @@ const query = {
                     pipe(Task.completedOn, Option.isSomeAnd(Date.isToday)),
                 ),
             )
-            .map((task: Task) => task.dataviewTask),
+            .map(Task.dataviewTask),
 };
 
 export const pendingActionItems = {

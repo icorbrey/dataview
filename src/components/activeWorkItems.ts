@@ -10,8 +10,8 @@ export const activeWorkItems = {
     component: () =>
         Render.callout({
             content: Some(Render.view('@activeWorkItems.content')),
+            modifier: 0 < query.all().length ? 'open' : 'closed',
             header: Render.view('@activeWorkItems.header'),
-            modifier: 'closed',
             type: 'todo',
         }),
     content: () =>

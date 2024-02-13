@@ -7,6 +7,15 @@ export const pages = {
             '#recentMeetings',
             '#departmentMembers',
         ]),
+    organization: () =>
+        Render.views(['#employees', '#students', '#recentMeetings']),
+    person: () =>
+        Render.views([
+            '#pendingActionItems',
+            '#recentMeetings',
+            '#recentConversations',
+            '#directReports',
+        ]),
     system: () =>
         Render.views([
             '#pendingActionItems',
@@ -20,4 +29,5 @@ export const pages = {
             '#recentMeetings',
             '#teamMembers',
         ]),
+    workItem: () => Render.views(['#pendingActionItems', '#recentMeetings']),
 };

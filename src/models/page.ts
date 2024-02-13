@@ -14,9 +14,11 @@ export class Page<T extends { [key: string]: any }> {
         this.m = m;
     }
 
+    public static query = () => dv.pages().map((page) => Page.fromRecord(page));
+
     public static fromRecord = <T extends { [key: string]: any }>(
         page: Record<string, any>,
-        fn: (page: Record<string, any>) => T,
+        fn: (page: Record<string, any>) => T = () => ({}) as T,
     ): Page<T> => {
         return new Page({
             file: File.fromRecord(page.file),

@@ -51,13 +51,15 @@ export class Person {
             department: Option.fromNullable(page.department).map(
                 Link.fromRecord,
             ),
+            reportsTo: Option.fromNullable(page['reports-to']).map(
+                Link.fromRecord,
+            ),
             employer: Option.fromNullable(page.employer).map(Link.fromRecord),
             school: Option.fromNullable(page.school).map(Link.fromRecord),
             graduationYear: Option.fromNullable(page['graduation-year']),
             major: Option.fromNullable(page.major).map(Link.fromRecord),
             minor: Option.fromNullable(page.minor).map(Link.fromRecord),
             favoriteDonut: Option.fromNullable(page['favorite-donut']),
-            reportsTo: Option.fromNullable(page['reports-to']),
             githubUrl: Option.fromNullable(page.github),
             email: Option.fromNullable(page.email),
             phone: Option.fromNullable(page.phone),
